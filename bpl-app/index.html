@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BPL app</title>
+    <style>
+        :root {
+            --bg-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --accent-color: #6c63ff;
+            --card-bg: #2d2d2d;
+            --border-color: #404040;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .content-section {
+            margin-bottom: 40px;
+        }
+
+        .info-block {
+            background: #363636;
+            padding: 20px;
+            border-left: 4px solid var(--accent-color);
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Для автоматического определения темы системы */
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg-color: #f0f0f0;
+                --text-color: #333;
+                --card-bg: #ffffff;
+                --border-color: #e0e0e0;
+            }
+            
+            .info-block {
+                background: #f9f9f9;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Документация для BPL с расширением для создания приложений</h1>
+        </header>
+
+        <section class="content-section">
+            <div class="info-block">
+                <h2>Чем отличется?</h2>
+                <p>В данной версии BPL добавлены методы для создания приложений прямо в коде без изменений в спрайте компилятора</p>
+            </div>
+
+            <div class="info-block">
+                <h2>Ссылки</h2>
+                <ul>
+                    <li><a href='https://sites.google.com/view/bpl-documentation/
+'>Оригинальная документация BPL</a>(Обезательно прочитать!)</li>
+                    <li><a href='/bpl-app/commands-list.html'Список команд</a></li>
+                    <li><a href='#'>Форма для отзывов<a/></li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
