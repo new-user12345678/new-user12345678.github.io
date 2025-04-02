@@ -11,6 +11,7 @@
             --accent-color: #6c63ff;
             --card-bg: #2d2d2d;
             --border-color: #404040;
+            --link-hover: #857dff; /* Добавили недостающую переменную */
         }
 
         * {
@@ -125,6 +126,14 @@
         a:hover::after {
             transform: scaleX(1);
         }
+                ul {
+            padding-left: 25px;
+            margin: 15px 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+            line-height: 1.5;
     </style>
 </head>
 <body>
@@ -142,8 +151,7 @@
             <div class="info-block">
                 <h2>Ссылки</h2>
                 <ul>
-                    <li><a href='https://sites.google.com/view/bpl-documentation/
-'>Оригинальная документация BPL</a>(Обезательно прочитать!)</li>
+                    <li><a href='https://sites.google.com/view/bpl-documentation/'>Оригинальная документация BPL</a>(Обезательно прочитать!)</li>
                     <li><a href='/bpl-app/commands-list.html'Список команд</a></li>
                     <li><a href='#'>Форма для отзывов<a/></li>
                 </ul>
