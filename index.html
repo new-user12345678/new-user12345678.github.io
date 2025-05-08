@@ -1,42 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Подключите SDK в <head> -->
-  <script src="https://unpkg.com/@discord/embedded-app-sdk@latest"></script>
+  <!-- Подключите Discord SDK через разрешенный URL -->
+  <script src="https://sdk.discordapp.link/discord-sdk-1.2.0.js"></script>
 </head>
 <body>
-  <!-- Контейнер для вывода информации -->
-  <div id="root"></div>
+  <div id="root">Загрузка...</div>
 
-  <script>
-  (async () => {
-    try {
-      const discordSdk = new DiscordSDK("ВАШ_CLIENT_ID");
-      await discordSdk.ready();
+  <script nonce="MjMyLDEzNCwxMjcsMjMyLDg1LDEzNiw5MCwxMzc=">
+    (async () => {
+      try {
+        // DiscordSDK теперь доступен через глобальную переменную
+        const discordSdk = new DiscordSDK("1370033603878322238");
+        await discordSdk.ready();
 
-      const { user } = await discordSdk.commands.authenticate({ 
-        type: "code",
-        code: "AUTH_TOKEN" 
-      });
+        // Аутентификация
+        const { code } = await discordSdk.commands.authenticate({
+          type: "code"
+        });
 
-      discordSdk.subscribe('VOICE_CHANNEL_SELECT', (data) => {
-        console.log("Пользователь в канале:", data.channelId);
-        
-        // Используйте безопасное обновление DOM
-        const root = document.getElementById('root');
-        if (root) {
+        // Подписка на события
+        discordSdk.subscribe('VOICE_CHANNEL_SELECT', (data) => {
+          const root = document.getElementById('root');
           root.textContent = `Пользователь в канале: ${data.channelId}`;
-        }
-      });
+        });
 
-    } catch (error) {
-      console.error("Ошибка:", error);
-      const root = document.getElementById('root');
-      if (root) {
+      } catch (error) {
+        const root = document.getElementById('root');
         root.textContent = `Ошибка: ${error.message}`;
       }
-    }
-  })();
+    })();
   </script>
 </body>
 </html>
