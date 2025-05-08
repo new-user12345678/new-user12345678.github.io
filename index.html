@@ -1,30 +1,42 @@
-<script>
-// Обернем весь код в асинхронную IIFE (Immediately Invoked Function Expression)
-(async () => {
-  try {
-    // Инициализация SDK
-    const discordSdk = new DiscordSDK("1370033603878322238");
-    await discordSdk.ready();
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Подключите SDK в <head> -->
+  <script src="https://unpkg.com/@discord/embedded-app-sdk@latest"></script>
+</head>
+<body>
+  <!-- Контейнер для вывода информации -->
+  <div id="root"></div>
 
-    // Аутентификация
-    const { user } = await discordSdk.commands.authenticate({ 
-      type: "code",
-      code: "AUTH_TOKEN" 
-    });
+  <script>
+  (async () => {
+    try {
+      const discordSdk = new DiscordSDK("ВАШ_CLIENT_ID");
+      await discordSdk.ready();
 
-    // Подписка на события
-    discordSdk.subscribe('VOICE_CHANNEL_SELECT', (data) => {
-      console.log("Пользователь в канале:", data.channelId);
-      
-      // Вместо document.write лучше использовать:
-      const output = document.createElement('div');
-      output.textContent = `Пользователь в канале: ${data.channelId}`;
-      document.body.appendChild(output);
-    });
+      const { user } = await discordSdk.commands.authenticate({ 
+        type: "code",
+        code: "AUTH_TOKEN" 
+      });
 
-  } catch (error) {
-    console.error("Ошибка:", error);
-    document.body.textContent = `Ошибка: ${error.message}`;
-  }
-})();
-</script>
+      discordSdk.subscribe('VOICE_CHANNEL_SELECT', (data) => {
+        console.log("Пользователь в канале:", data.channelId);
+        
+        // Используйте безопасное обновление DOM
+        const root = document.getElementById('root');
+        if (root) {
+          root.textContent = `Пользователь в канале: ${data.channelId}`;
+        }
+      });
+
+    } catch (error) {
+      console.error("Ошибка:", error);
+      const root = document.getElementById('root');
+      if (root) {
+        root.textContent = `Ошибка: ${error.message}`;
+      }
+    }
+  })();
+  </script>
+</body>
+</html>
