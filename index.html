@@ -1,15 +1,30 @@
-<script>// Инициализация SDK
-discordSdk = new DiscordSDK("YOUR_CLIENT_ID");
-await discordSdk.ready();
+<script>
+// Обернем весь код в асинхронную IIFE (Immediately Invoked Function Expression)
+(async () => {
+  try {
+    // Инициализация SDK
+    const discordSdk = new DiscordSDK("1370033603878322238");
+    await discordSdk.ready();
 
-// Получение информации о пользователе
-const { user } = await discordSdk.commands.authenticate({ 
-  type: "code", 
-  code: "AUTH_TOKEN" 
-});
+    // Аутентификация
+    const { user } = await discordSdk.commands.authenticate({ 
+      type: "code",
+      code: "AUTH_TOKEN" 
+    });
 
-// Подписка на события голосового канала
-discordSdk.subscribe('VOICE_CHANNEL_SELECT', (data) => {
-  console.log("Пользователь в канале:", data.channelId);
-  document.write("Пользователь в канале:", data.channelId)
-});</script>
+    // Подписка на события
+    discordSdk.subscribe('VOICE_CHANNEL_SELECT', (data) => {
+      console.log("Пользователь в канале:", data.channelId);
+      
+      // Вместо document.write лучше использовать:
+      const output = document.createElement('div');
+      output.textContent = `Пользователь в канале: ${data.channelId}`;
+      document.body.appendChild(output);
+    });
+
+  } catch (error) {
+    console.error("Ошибка:", error);
+    document.body.textContent = `Ошибка: ${error.message}`;
+  }
+})();
+</script>
