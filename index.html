@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Подключите Discord SDK через разрешенный URL -->
-  <script src="https://sdk.discordapp.link/discord-sdk-1.2.0.js"></script>
+  <!-- Discord автоматически добавит SDK -->
 </head>
 <body>
   <div id="root">Загрузка...</div>
 
-  <script nonce="MjMyLDEzNCwxMjcsMjMyLDg1LDEzNiw5MCwxMzc=">
-    (async () => {
+  <script nonce="ВАШ_NONCE">
+    // 1. Получите nonce из параметров Discord
+    const urlParams = new URLSearchParams(window.location.search);
+    const nonce = urlParams.get('nonce') || 'MTk5LDQ1LDE2NywxODMsMTExLDEsMTc5LDg1';
+
+    // 2. Динамически создайте тег скрипта с nonce
+    const script = document.createElement('script');
+    script.nonce = nonce;
+    script.src = 'https://sdk.discordapp.link/discord-sdk-2.0.0.js'; // Актуальная версия
+
+    // 3. Загрузите SDK
+    script.onload = async () => {
       try {
-        // DiscordSDK теперь доступен через глобальную переменную
         const discordSdk = new DiscordSDK("1370033603878322238");
         await discordSdk.ready();
 
-        // Аутентификация
-        const { code } = await discordSdk.commands.authenticate({
-          type: "code"
-        });
-
-        // Подписка на события
-        discordSdk.subscribe('VOICE_CHANNEL_SELECT', (data) => {
-          const root = document.getElementById('root');
-          root.textContent = `Пользователь в канале: ${data.channelId}`;
-        });
-
+        // Ваш код Activity...
       } catch (error) {
-        const root = document.getElementById('root');
-        root.textContent = `Ошибка: ${error.message}`;
+        document.getElementById('root').textContent = `Ошибка: ${error.message}`;
       }
-    })();
+    };
+
+    script.onerror = () => {
+      document.getElementById('root').textContent = 'Ошибка загрузки SDK';
+    };
+
+    document.head.appendChild(script);
   </script>
 </body>
 </html>
