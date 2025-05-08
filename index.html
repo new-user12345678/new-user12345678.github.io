@@ -11,4 +11,5 @@ const { user } = await discordSdk.commands.authenticate({
 // Подписка на события голосового канала
 discordSdk.subscribe('VOICE_CHANNEL_SELECT', (data) => {
   console.log("Пользователь в канале:", data.channelId);
+  document.write("Пользователь в канале:", data.channelId)
 });</script>
