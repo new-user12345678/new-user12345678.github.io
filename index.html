@@ -1,0 +1,14 @@
+<script>// Инициализация SDK
+discordSdk = new DiscordSDK("YOUR_CLIENT_ID");
+await discordSdk.ready();
+
+// Получение информации о пользователе
+const { user } = await discordSdk.commands.authenticate({ 
+  type: "code", 
+  code: "AUTH_TOKEN" 
+});
+
+// Подписка на события голосового канала
+discordSdk.subscribe('VOICE_CHANNEL_SELECT', (data) => {
+  console.log("Пользователь в канале:", data.channelId);
+});</script>
